@@ -52,7 +52,7 @@ func SendPriceAlert(collectionData types.CollectionData, priceMonitored string, 
 }
 
 func LogError(err string) {
-	url := utils.GetConfigFromJson().PriceAlertWebhook
+	url := utils.GetConfigFromJson().ErrorWebhook
 	username := "Error Logger"
 
 	embedFields := []types.Field{
