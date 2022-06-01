@@ -50,15 +50,8 @@ func GetConfigFromJson() types.Configuration {
 	return config
 }
 
-func ConvertLamportsToSol(fp string) string {
-	fpValue, err := strconv.ParseFloat(fp, 64)
-	if err != nil {
-		return "error"
-	}
-
-	solValue := fpValue / SOL_LAMPORTS
-
-	return fmt.Sprintf(fmt.Sprintf("%f", solValue))
+func ConvertLamportsToSol(fp float64) string {
+	return fmt.Sprintf(fmt.Sprintf("%.2f", (fp / SOL_LAMPORTS)))
 }
 
 func InputInteger(label string) int {

@@ -45,11 +45,11 @@ type Footer struct {
 }
 
 type CollectionData struct {
-	Symbol       string
-	FloorPrice   int
-	ListedCount  int
-	avgPrice24hr float64
-	volumeAll    int
+	Symbol       string  `json:"symbol"`
+	FloorPrice   float64 `json:"floorPrice"`
+	ListedCount  int     `json:"listedCount"`
+	AvgPrice24Hr float64 `json:"avgPrice24hr"`
+	VolumeAll    float64 `json:"volumeAll"`
 }
 
 type Collection struct {

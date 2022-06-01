@@ -37,10 +37,10 @@ func GetCollectionStats(collectionName string) types.CollectionData {
 
 	if collection.Symbol != "" {
 		fmt.Printf("Collection Name: %s\n", collection.Symbol)
-		fmt.Printf("Collection FP: %d\n", collection.FloorPrice)
-		fmt.Printf("Collection Avg24h: %f\n", 0.0)
+		fmt.Printf("Collection FP: %f\n", collection.FloorPrice)
+		fmt.Printf("Collection Avg24h: %f\n", collection.AvgPrice24Hr)
 		fmt.Printf("Collection ListedCount: %d\n", collection.ListedCount)
-		fmt.Printf("Collection Volume: %d\n", 0)
+		fmt.Printf("Collection Volume: %f\n", collection.VolumeAll)
 	} else {
 		fmt.Printf("GetCollectionStats error")
 		discord.LogError("GetCollectionStats error")

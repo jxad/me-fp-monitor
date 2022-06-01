@@ -11,25 +11,34 @@ func SendPriceAlert(collectionData types.CollectionData, priceMonitored string, 
 	username := "FP Monitor"
 	url := utils.GetConfigFromJson().PriceAlertWebhook
 
-	fp := strconv.Itoa(collectionData.FloorPrice)
-	listedCount := strconv.Itoa(collectionData.ListedCount)
-
 	embedFields := []types.Field{
 		{
 			Name:   "Price Monitored",
-			Value:  priceMonitored,
+			Value:  priceMonitored + " ◎",
 			Inline: false,
 		},
 
 		{
 			Name:   "Floor Price",
-			Value:  utils.ConvertLamportsToSol(fp),
+			Value:  utils.ConvertLamportsToSol(collectionData.FloorPrice) + " ◎",
 			Inline: false,
 		},
 
 		{
 			Name:   "Listed Count",
-			Value:  listedCount,
+			Value:  strconv.Itoa(collectionData.ListedCount),
+			Inline: false,
+		},
+
+		{
+			Name:   "24H AVG Price",
+			Value:  utils.ConvertLamportsToSol(collectionData.AvgPrice24Hr) + " ◎",
+			Inline: false,
+		},
+
+		{
+			Name:   "Total Volume",
+			Value:  utils.ConvertLamportsToSol(collectionData.VolumeAll) + " ◎",
 			Inline: false,
 		},
 	}

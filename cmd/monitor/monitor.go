@@ -42,7 +42,7 @@ func CheckCollection(name string, upOrDown string, price string) int {
 	var counter int = 0
 	collectionData := api.GetCollectionStats(name)
 	if collectionData.Symbol != "" {
-		fp := utils.ConvertLamportsToSol(strconv.Itoa(collectionData.FloorPrice))
+		fp := utils.ConvertLamportsToSol(collectionData.FloorPrice)
 		var userPrice float64
 		var collectionPrice float64
 
