@@ -12,8 +12,6 @@ import (
 	"web3.warehouse/mefpmonitor/utils"
 )
 
-const JSON_FILE = "collections.json"
-
 func main() {
 	CheckJsonFiles()
 
