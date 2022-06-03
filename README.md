@@ -79,3 +79,4 @@ If is going to be needed, proxy support can be added.
 ![webhook_price_alert](https://user-images.githubusercontent.com/35408842/171857301-4a9a5a82-e7ee-4250-9a6e-2012e0c0ba6e.PNG)
 
 ## Licence
+This software is available under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) license. See [LICENSE](https://github.com/jxad/me-fp-monitor/blob/master/LICENSE) for the full license text.
