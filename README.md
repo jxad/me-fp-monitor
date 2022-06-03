@@ -6,6 +6,7 @@
 - [Quick Start Single Collection Monitor](#quick-start-single-collection-monitor)
 - [Quick Start Multiple Collection Monitor](#quick-start-multiple-collection-monitor) 
 - [Sneak Peek](#sneak-peek)
+- [Licence](#licence)
 
 ## Features
 - Single collection monitoring
@@ -65,3 +66,6 @@ I recommend high delays so you can monitor many collections with no limitation.
 If is going to be needed, proxy support can be added.
 
 ## Sneak Peek
+TODO
+
+## Licence
