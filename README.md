@@ -69,6 +69,12 @@ I recommend high delays so you can monitor many collections with no limitation.
 If is going to be needed, proxy support can be added.
 
 ## Sneak Peek
-TODO
+### Single Collection Monitor
+![single_collection_sneak_peek](https://user-images.githubusercontent.com/35408842/171857198-f302da22-fa29-4940-8fd3-f4091c5e1a39.gif)
+
+
+### Discord Webhook Price Alert
+![webhook_price_alert](https://user-images.githubusercontent.com/35408842/171857301-4a9a5a82-e7ee-4250-9a6e-2012e0c0ba6e.PNG)
+
 
 ## Licence
