@@ -5,7 +5,7 @@
 - [Installation](#installation)
 - [Quick Start Single Collection Monitor](#quick-start-single-collection-monitor)
 - [Quick Start Multiple Collection Monitor](#quick-start-multiple-collection-monitor) 
-- [Quick Start Multiple Collection Monitor](#sneak-peek)
+- [Sneak Peek](#sneak-peek)
 
 ## Features
 - Single collection monitoring
