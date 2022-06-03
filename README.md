@@ -59,7 +59,8 @@ Collections can be also edited from the CLI
 - Run mefpmonitor.exe
 - Select Start Multiple Collection Monitor
 - Select Start Monitor
-- Input a delay 
+- Input a delay
+ 
 The delay its per collection. If you input 60 seconds. All collections are going to be checked every 60 seconds.
 If you have 3 collections, the monitor is going to send a request every 20 seconds. [MagicEden Public API](https://api.magiceden.dev/) are ratelimited: default limit is 120 TPM or 2 QPS
 I recommend high delays so you can monitor many collections with no limitation.
