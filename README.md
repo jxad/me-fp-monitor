@@ -26,12 +26,12 @@ go build
 ```
 
 ## Quick Start Single Collection Monitor
-- input collection name
-- select UP or DOWN (UP is going to check if the price go higher than the price inserted, DOWN is going to check if the price go lower)
-- input the price
+- Input collection name
+- Select UP or DOWN (UP is going to check if the price go higher than the price inserted, DOWN is going to check if the price go lower)
+- Input the price
 
 ## Quick Start Multiple Collection Monitor
-- edit config.json
+- Edit config.json
 ```json
 {
     "errorWebhook": "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE",
@@ -39,7 +39,7 @@ go build
     "magicEdenApiEndpoint": "https://api-mainnet.magiceden.io/v2"
 }
 ```
-- edit collections.json
+- Edit collections.json
 ```json
 [
     {
