@@ -15,9 +15,9 @@ import (
 func main() {
 	CheckJsonFiles()
 
-	myFigure := figure.NewColorFigure("WEB3.WRHS", "", "purple", true)
+	myFigure := figure.NewColorFigure("IO.wrhs", "", "purple", true)
 	myFigure.Print()
-	fmt.Print("                                                                       @jxadd\n")
+	fmt.Print("                                             @jxadd\n")
 	menu.StartMenu()
 }
 
