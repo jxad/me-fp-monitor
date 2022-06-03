@@ -8,6 +8,9 @@ import (
 	"web3.warehouse/mefpmonitor/utils"
 )
 
+const DEFAULT_DELAY_SINGLE_COLLECTION_MONITOR = 30
+const DEFAULT_DELAY_MULTIPLE_COLLECTION_MONITOR = 600
+
 func StartMenu() {
 	var choices = []string{"Start One Collection Monitor", "Multiple Collection Monitor"}
 
@@ -43,9 +46,9 @@ func SingleCollectionMonitorMenu() {
 
 	//GetDelay
 	delay = utils.InputInteger("Enter delay (seconds)")
-	if delay < 30 {
-		fmt.Print("Delay too low, new value set (60 seconds)\n")
-		delay = 60
+	if delay < 0 {
+		fmt.Printf("Delay too low, using default delay (%d seconds)\n", DEFAULT_DELAY_SINGLE_COLLECTION_MONITOR)
+		delay = DEFAULT_DELAY_SINGLE_COLLECTION_MONITOR
 	}
 
 	monitor.StartSingleCollectionMonitor(collectionName, upordown, priceDiff, delay)
@@ -69,11 +72,11 @@ func MultipleCollectionMonitorMenu() {
 	switch result {
 	case choices[0]:
 		delay := utils.InputInteger("Enter single request delay (seconds)")
-		if delay >= 300 {
-			monitor.StartMultipleCollectionMonitor(delay)
+		if delay < 0 {
+			fmt.Printf("Delay too low, using default delay (%d seconds)\n", DEFAULT_DELAY_MULTIPLE_COLLECTION_MONITOR)
+			monitor.StartMultipleCollectionMonitor(DEFAULT_DELAY_MULTIPLE_COLLECTION_MONITOR)
 		} else {
-			fmt.Printf("Delay too low, using default delay (600 seconds)\n")
-			monitor.StartMultipleCollectionMonitor(600)
+			monitor.StartMultipleCollectionMonitor(delay)
 		}
 	case choices[1]:
 		MultipleCollectionSettingsMenu()
