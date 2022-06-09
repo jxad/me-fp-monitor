@@ -69,6 +69,14 @@ I recommend high delays so you can monitor many collections with no limitation.
 If is going to be needed, proxy support can be added.
 
 ## Sneak Peek
-TODO
+### Single Collection Monitor
+![single_collection_sneak_peek](https://user-images.githubusercontent.com/35408842/171857198-f302da22-fa29-4940-8fd3-f4091c5e1a39.gif)
+
+### Multiple Collection Monitor
+![multiple_collection_sneak_peek](https://user-images.githubusercontent.com/35408842/171858257-45d6b6b1-79dc-42d4-8da9-6e2f8392c4f8.gif)
+
+### Discord Webhook Price Alert
+![webhook_price_alert](https://user-images.githubusercontent.com/35408842/171857301-4a9a5a82-e7ee-4250-9a6e-2012e0c0ba6e.PNG)
 
 ## Licence
+This software is available under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) license. See [LICENSE](https://github.com/jxad/me-fp-monitor/blob/master/LICENSE) for the full license text.
