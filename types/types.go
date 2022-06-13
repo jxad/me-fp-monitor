@@ -53,13 +53,18 @@ type CollectionData struct {
 }
 
 type Collection struct {
-	Symbol   string `json:"symbol"`
-	Price    string `json:"price"`
-	UpOrDown string `json:"upordown"`
+	Symbol    string         `json:"symbol"`
+	UpAlert   AlertCondition `json:"up"`
+	DownAlert AlertCondition `json:"down"`
 }
 
 type Configuration struct {
 	ErrorWebhook         string `json:"errorWebhook"`
 	PriceAlertWebhook    string `json:"priceAlertWebhook"`
 	MagicEdenAPIEndpoint string `json:"magicEdenApiEndpoint"`
+}
+
+type AlertCondition struct {
+	Enabled bool   `json:"enabled"`
+	Price   string `json:"price"`
 }

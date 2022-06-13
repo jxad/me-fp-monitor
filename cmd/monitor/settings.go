@@ -13,17 +13,33 @@ import (
 
 func AddCollection() {
 	var symbol string
-	var price string
-	var upordown string
+	var up bool
+	var down bool
+	var upAlertPrice string
+	var downAlertPrice string
 
 	symbol = utils.InputString("Name")
-	price = utils.InputString("Price")
-	upordown = utils.PriceAlertConditionMenu()
+
+	up = utils.PriceAlertConditionMenu("Up")
+	if up {
+		upAlertPrice = utils.InputString("Up Alert Price")
+	}
+
+	down = utils.PriceAlertConditionMenu("Down")
+	if down {
+		downAlertPrice = utils.InputString("Down Alert Price")
+	}
 
 	collection := types.Collection{
-		Symbol:   symbol,
-		Price:    price,
-		UpOrDown: upordown,
+		Symbol: symbol,
+		UpAlert: types.AlertCondition{
+			Enabled: up,
+			Price:   upAlertPrice,
+		},
+		DownAlert: types.AlertCondition{
+			Enabled: up,
+			Price:   downAlertPrice,
+		},
 	}
 
 	collections := utils.GetCollectionsFromJson()
@@ -65,13 +81,24 @@ func ViewCollections() {
 	t := table.NewWriter()
 	t.SetStyle(table.StyleLight)
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{"Id", "Symbol", "Price", "Up Or Down"})
+	t.AppendHeader(table.Row{"Id", "Symbol", "Up Alert", "Down Alert"})
 
 	counter := 0
 	for _, collection := range collections {
 		counter += 1
+		var up string = "Disabled"
+		var down string = "Disabled"
+
+		if collection.UpAlert.Enabled {
+			up = collection.UpAlert.Price
+		}
+
+		if collection.UpAlert.Enabled {
+			down = collection.DownAlert.Price
+		}
+
 		t.AppendRow(table.Row{
-			counter, collection.Symbol, collection.Price, collection.UpOrDown},
+			counter, collection.Symbol, up, down},
 		)
 	}
 

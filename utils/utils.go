@@ -98,11 +98,11 @@ func InputString(label string) string {
 	return result
 }
 
-func PriceAlertConditionMenu() string {
-	var choices = []string{"Up", "Down"}
+func PriceAlertConditionMenu(upOrDown string) bool {
+	var choices = []string{"Yes", "No"}
 
 	prompt := promptui.Select{
-		Label: "Price Alert Condition",
+		Label: "Alert if price go " + upOrDown,
 		Items: choices,
 	}
 
@@ -110,15 +110,15 @@ func PriceAlertConditionMenu() string {
 
 	if err != nil {
 		fmt.Printf("Prompt failed %v\n", err)
-		return "error"
+		return false
 	}
 
 	switch result {
 	case choices[0]:
-		return "UP"
+		return true
 	case choices[1]:
-		return "DOWN"
+		return false
 	default:
-		return "error"
+		return false
 	}
 }

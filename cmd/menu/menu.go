@@ -5,6 +5,7 @@ import (
 
 	"github.com/manifoldco/promptui"
 	monitor "web3.warehouse/mefpmonitor/cmd/monitor"
+	"web3.warehouse/mefpmonitor/types"
 	"web3.warehouse/mefpmonitor/utils"
 )
 
@@ -36,13 +37,32 @@ func StartMenu() {
 
 func SingleCollectionMonitorMenu() {
 	var collectionName string
-	var upordown string
-	var priceDiff string
+	var up bool
+	var upAlertPrice string = ""
+	var down bool
+	var downAlertPrice string = ""
 	var delay int
 
 	collectionName = utils.InputString("Collection name")
-	upordown = utils.PriceAlertConditionMenu()
-	priceDiff = utils.InputString("Price")
+	up = utils.PriceAlertConditionMenu("Up")
+	if up {
+		upAlertPrice = utils.InputString("Up Alert Price")
+	}
+
+	upAlert := types.AlertCondition{
+		Enabled: up,
+		Price:   upAlertPrice,
+	}
+
+	down = utils.PriceAlertConditionMenu("Down")
+	if down {
+		downAlertPrice = utils.InputString("Down Alert Price")
+	}
+
+	downAlert := types.AlertCondition{
+		Enabled: down,
+		Price:   downAlertPrice,
+	}
 
 	//GetDelay
 	delay = utils.InputInteger("Enter delay (seconds)")
@@ -51,7 +71,7 @@ func SingleCollectionMonitorMenu() {
 		delay = DEFAULT_DELAY_SINGLE_COLLECTION_MONITOR
 	}
 
-	monitor.StartSingleCollectionMonitor(collectionName, upordown, priceDiff, delay)
+	monitor.StartSingleCollectionMonitor(collectionName, upAlert, downAlert, delay)
 }
 
 func MultipleCollectionMonitorMenu() {

@@ -2,26 +2,19 @@ package cmd
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strconv"
 	"time"
 
 	"github.com/gosuri/uilive"
 	"web3.warehouse/mefpmonitor/api"
 	discord "web3.warehouse/mefpmonitor/cmd/discord"
+	"web3.warehouse/mefpmonitor/types"
 	"web3.warehouse/mefpmonitor/utils"
 )
 
-func StartSingleCollectionMonitor(name string, upOrDown string, price string, delay int) {
+func StartSingleCollectionMonitor(name string, upAlert types.AlertCondition, downAlert types.AlertCondition, delay int) {
 	for {
-		counter := CheckCollection(name, upOrDown, price)
-
-		if counter >= 3 {
-			fmt.Printf("3 alerts sent. Stopping monitor...")
-			os.Exit(0)
-		}
-
+		CheckCollection(name, upAlert, downAlert)
 		StartTimer(delay)
 	}
 }
@@ -32,49 +25,46 @@ func StartMultipleCollectionMonitor(delay int) {
 		fixedDelay := delay / len(collections)
 
 		for i := 0; i < len(collections); i++ {
-			CheckCollection(collections[i].Symbol, collections[i].UpOrDown, collections[i].Price)
+			CheckCollection(collections[i].Symbol, collections[i].UpAlert, collections[i].DownAlert)
 			StartTimer(fixedDelay)
 		}
 	}
 }
 
-func CheckCollection(name string, upOrDown string, price string) int {
-	var counter int = 0
+func CheckCollection(name string, upAlert types.AlertCondition, downAlert types.AlertCondition) {
 	collectionData := api.GetCollectionStats(name)
 	if collectionData.Symbol != "" {
 		fp := utils.ConvertLamportsToSol(collectionData.FloorPrice)
-		var userPrice float64
-		var collectionPrice float64
+		var upAlertPrice float64
+		var downAlertPrice float64
+		var collectionFP float64
 
-		if userPriceFloat, err := strconv.ParseFloat(price, 64); err == nil {
-			userPrice = userPriceFloat
-		} else {
-			log.Fatalf("Error - Invalid FP inserted")
-			discord.LogError("Error - Invalid FP inserted")
+		upAlertPrice, err := strconv.ParseFloat(upAlert.Price, 64)
+		if err != nil {
+			fmt.Println("CheckCollection error: " + err.Error())
+			return
 		}
 
-		if fpPriceFloat, err := strconv.ParseFloat(fp, 64); err == nil {
-			collectionPrice = fpPriceFloat
-		} else {
-			log.Fatalf("Error - Invalid Collection FP (memonitor.go => row 31)")
-			discord.LogError("Error - Invalid Collection FP (memonitor.go => row 31)")
+		downAlertPrice, err = strconv.ParseFloat(downAlert.Price, 64)
+		if err != nil {
+			fmt.Println("CheckCollection error: " + err.Error())
+			return
 		}
 
-		switch upOrDown {
-		case "UP":
-			if collectionPrice > userPrice {
-				counter += 1
-				discord.SendPriceAlert(collectionData, price, "FP Price is Up!!")
-			}
-		case "DOWN":
-			if userPrice > collectionPrice {
-				counter += 1
-				discord.SendPriceAlert(collectionData, price, "FP Price is Down!!")
-			}
+		collectionFP, err = strconv.ParseFloat(fp, 64)
+		if err != nil {
+			fmt.Println("CheckCollection error: " + err.Error())
+			return
+		}
+
+		if upAlert.Enabled && (collectionFP > upAlertPrice) {
+			discord.SendPriceAlert(collectionData, upAlert.Price, "FP Price is Up!!")
+		}
+
+		if downAlert.Enabled && (collectionFP < downAlertPrice) {
+			discord.SendPriceAlert(collectionData, downAlert.Price, "FP Price is Down!!")
 		}
 	}
-
-	return counter
 }
 
 func StartTimer(delay int) {
