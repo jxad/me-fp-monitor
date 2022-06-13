@@ -54,7 +54,7 @@ go build
 			"price": "0"
 		}
 	},
-		{
+	{
 		"symbol": "okay_bears",
 		"up": {
 			"enabled": true,
@@ -64,7 +64,7 @@ go build
 			"enabled": true,
 			"price": "50"
 		}
-	},
+	}
 ]
 ```
 Collections can be also edited from the CLI
