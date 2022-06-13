@@ -27,8 +27,9 @@ go build
 
 ## Quick Start Single Collection Monitor
 - Input collection name
-- Select UP or DOWN (UP is going to check if the price go higher than the price inserted, DOWN is going to check if the price go lower)
-- Input the price
+- Select Up Alert Conditions (yes or no. If yes price to check)
+- Select Down Alert Conditions (yes or no. If yes price to check) 
+- Input Delay
 
 ## Quick Start Multiple Collection Monitor
 - Edit config.json
@@ -36,22 +37,34 @@ go build
 {
     "errorWebhook": "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE",
     "priceAlertWebhook": "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE",
-    "magicEdenApiEndpoint": "https://api-mainnet.magiceden.io/v2"
+    "magicEdenApiEndpoint": "https://api-mainnet.magiceden.dev/v2"
 }
 ```
 - Edit collections.json
 ```json
 [
-    {
-        "symbol": "enviro",
-        "price": "7",
-        "upordown": "UP"
-    },
-    {
-        "symbol": "okay_bears",
-        "price": "150",
-        "upordown": "DOWN"
-    }
+	{
+		"symbol": "enviro",
+		"up": {
+			"enabled": true,
+			"price": "10"
+		},
+		"down": {
+			"enabled": false,
+			"price": "0"
+		}
+	},
+		{
+		"symbol": "okay_bears",
+		"up": {
+			"enabled": true,
+			"price": "200"
+		},
+		"down": {
+			"enabled": true,
+			"price": "50"
+		}
+	},
 ]
 ```
 Collections can be also edited from the CLI
